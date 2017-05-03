@@ -3,7 +3,7 @@ set nocompatible
 " source plugin file
 source ~/plugins.vimrc
 
-colorscheme Atom
+colorscheme atom
 
 "-------------General Settings--------------"
 
