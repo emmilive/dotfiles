@@ -1,12 +1,5 @@
 set nocompatible
 
-" source plugin file
-source ~/plugins.vimrc
-
-colorscheme atom
-
-"-------------General Settings--------------"
-
 set backspace=indent,eol,start              "Make backspace behave like every other editor.
 let mapleader = ',' 					    "The default leader is \, but a comma is much better.
 set number								    "Let's activate line numbers.
@@ -37,12 +30,6 @@ set hlsearch
 set incsearch
 
 "-------------Mappings--------------"
-
-" NERDTree with Cmd+1 (like phpstorm)
-map <D-1> :NERDTreeToggle<cr>
-
-"Make it easy to edit the Vimrc file.
-nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
 "Add simple highlight removal.
 nmap <Leader><space> :nohlsearch<cr>
