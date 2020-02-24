@@ -1,13 +1,15 @@
-# vimrc
-My .vimrc, inspired by JeffreyWay
+# dotfiles
+My dotfiles
 
 ## How to use
 
 1. Clone or download this Repository
-2. Copy the `.vimrc` and `plugins.vimrc` files to your home-directory
-3. `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-4. run `vim +PluginInstall +qall` to install plugins
-5. Enjoy
+1. Copy the `.vimrc` and/or `.zshrc` files to your home-directory
+1. Install Antigen (see https://github.com/zsh-users/antigen/wiki/Installation)
+    - On macOS run `brew install antigen`
+    - On Debian Linux run `apt-get install zsh-antigen` **or using the installer**
+    - `curl -L git.io/antigen > antigen.zsh`
+1. Enjoy
 
 ## Trouleshooting
 
