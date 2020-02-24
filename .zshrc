@@ -20,7 +20,6 @@ antigen bundle zdharma/history-search-multi-word
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Theme
-# antigen theme ys
 antigen theme romkatv/powerlevel10k
 
 antigen apply
