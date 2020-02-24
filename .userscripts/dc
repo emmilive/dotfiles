@@ -1,0 +1,2 @@
+#!/bin/bash
+docker-compose -f provisioning/development/docker-compose.yml -p ${PWD##*/} ${@:1:99}%
