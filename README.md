@@ -9,6 +9,9 @@ My dotfiles
     - On macOS run `brew install antigen`
     - On Debian Linux run `apt-get install zsh-antigen` **or using the installer**
     - `curl -L git.io/antigen > antigen.zsh`
+1. Install vundle
+    - `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+    - Install Vundle and plugins in vim `:PluginInstall` or commandline `vim +PluginInstall +qall`
 1. Enjoy
 
 ## Trouleshooting
