@@ -1,0 +1,38 @@
+# Theme
+theme = Monokai Pro
+
+# Font
+font-family = "Hack Nerd Font Mono"
+font-size = 20
+
+# Window
+macos-titlebar-style = tabs
+window-padding-x = 12
+window-padding-y = 12
+window-padding-balance = true
+window-decoration = true
+window-save-state = always
+background-opacity = 0.96
+background-blur = 10
+unfocused-split-opacity = 0.6
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Scrollback
+scrollback-limit = 100000
+
+# Clipboard
+copy-on-select = clipboard
+clipboard-paste-protection = true
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Shell integration (zsh/bash/fish wird automatisch erkannt)
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# Bell
+bell-features = no-audio

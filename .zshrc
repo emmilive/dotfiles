@@ -1,63 +1,50 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# brew config
+export PATH=$HOME/homebrew/bin:$PATH
+export PATH="/Users/j-emrich/homebrew/sbin:$PATH"
+export HOMEBREW_CASK_OPTS="--appdir=\"~/Applications/brew\""
+
+eval "$(starship init zsh)"
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Initialize antigen
-source /usr/local/share/antigen/antigen.zsh
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-# Start tmux when zsh launches
-export ZSH_TMUX_AUTOSTART=true
+### End of Zinit's installer chunk
 
-# use oh-my-zsh
-antigen use oh-my-zsh
+# OMZ-Snippets
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::lib/directories.zsh
+zinit snippet OMZL::theme-and-appearance.zsh
+zinit snippet OMZP::ssh-agent
 
-# Plugins
-antigen bundle brew
-antigen bundle colored-man-pages
-antigen bundle docker
-antigen bundle git
-antigen bundle kubectl
-antigen bundle osx
-antigen bundle ssh-agent
-antigen bundle tmux
+# Moderne Plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma-continuum/history-search-multi-word
 
-# plugins from other repositories
-antigen bundle zdharma/history-search-multi-word
-antigen bundle zsh-users/zsh-syntax-highlighting
+# jump between words with option + <-/->
+autoload -U select-word-style
+select-word-style bash
 
-# Theme
-# antigen theme ys
-antigen theme romkatv/powerlevel10k
-
-antigen apply
-
-export DISABLE_UNTRACKED_FILES_DIRTY=true
-export ZSH_DISABLE_COMPFIX=true
-
-# add locations to PATH
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-export PATH="$PATH:$HOME/.userscripts"
-
-# nvm config
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# halt all vagrant machines globally
-vagrant() {
-  if [[ $@ == "halt all" ]]; then
-    command vagrant global-status | grep running | colrm 8 | xargs -L 1 -t vagrant halt
-  else
-    command vagrant "$@"
-  fi
-}
-
-# configuring my docker-machine
-
-if [ -z "$DOCKER_HOST" ]; then
- eval $(docker-machine env default)
-fi
+# use visual-studio-code for most editor actions
+export EDITOR='code --wait'
 
 # some aliases
 alias zshconfig="vi ~/.zshrc"
@@ -65,6 +52,13 @@ alias c='pygmentize -f terminal256 -O style=native -g'
 alias gbpurge='git branch --merged | grep -v "\*" | grep -v "master" | grep -v "develop" | xargs -n 1 git branch -d'
 alias dc="~/.userscripts/dc"
 alias dm=". ~/.userscripts/dm"
+alias link8.1="brew unlink php@8.2 && brew link php@8.1 --force --overwrite"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# add locations to PATH
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+export PATH="$PATH:$HOME/.userscripts"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$HOME/.local/bin:$PATH"
